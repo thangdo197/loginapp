@@ -21,7 +21,7 @@ const Welcome = () => {
 
         <View style={{ gap: 20 }}>
           <Text style={styles.title}>Hello</Text>
-          <Text style={styles.punchline}>Goodbye</Text>
+          <Text style={styles.punchline}>MTG</Text>
         </View>
 
         <View style={styles.footer}>
