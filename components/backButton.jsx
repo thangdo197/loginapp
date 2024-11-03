@@ -12,12 +12,7 @@ import { theme } from "../constants/theme";
 const BackButton = ({ size = 26, router }) => {
   return (
     <Pressable onPress={() => router.back()} style={styles.button}>
-      <Icon
-        name="arrowLeft"
-        strokeWidth={2.5}
-        size={size}
-        color={theme.colors.text}
-      />
+      <Icon name="arrowLeft" strokeWidth={2.5} size={size} />
     </Pressable>
   );
 };
@@ -29,6 +24,5 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: 5,
     borderRadius: theme.radius.sm,
-    backgroundColor: "rgba(0,0,0,0.07)",
   },
 });
