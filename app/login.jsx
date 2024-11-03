@@ -1,4 +1,4 @@
-import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import Input from "../components/Input";
 import React, { useRef, useState } from "react";
 import ScreenWrapper from "../components/ScreenWrapper";
@@ -9,6 +9,8 @@ import BackButton from "../components/backButton";
 import { useRouter } from "expo-router";
 import { wp, hp } from "../helpers/common";
 import Button from "../components/Button";
+import SweetAlert from "react-native-sweet-alert";
+
 const Login = () => {
   const router = useRouter();
   const emailRef = useRef("");
@@ -16,7 +18,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const onSubmit = async () => {
     if (!emailRef || !passwordRef) {
-      Window.alert("Login", "please fill all the fields");
+      SweetAlert.alert("Login", "please fill all the fields");
       return;
     }
   };
@@ -54,7 +56,7 @@ const Login = () => {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>Don't have an account?</Text>
-          <Pressable>
+          <Pressable onPress={() => router.push("signUp")}>
             <Text
               style={[
                 styles.footerText,
