@@ -32,9 +32,7 @@ const ContactUs = () => {
     <ScreenWrapper>
       <StatusBar style="dark" />
       <View style={styles.container}>
-        <Pressable onPress={() => router.back()}>
-          <Text style={styles.backButton}>Back</Text>
-        </Pressable>
+        <BackButton router={router}></BackButton>
         <View>
           <Text style={[styles.welcomeText, { color: "blue" }]}>
             Get in Touch
