@@ -7,19 +7,25 @@ import Button from "../components/Button";
 import { StatusBar } from "expo-status-bar";
 import { useRouter } from "expo-router";
 import Icon from "../assets/icons";
-
+import DigitalClock from "../components/DigitalClock";
 const index = () => {
   const router = useRouter();
   return (
     <ScreenWrapper bg="white">
       <StatusBar style="dark" />
       <View style={styles.container}>
-        <Image
-          style={styles.welcomeImage}
-          resizeMode="contain"
-          source={require("../assets/images/welcome.png")}
-        />
-
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.welcomeImage}
+            resizeMode="contain"
+            source={require("../assets/images/welcome1.png")}
+          />
+          <View style={styles.clockContainer}>
+            <DigitalClock />
+          </View>
+        </View>
+      </View>
+      <View style={styles.container}>
         <View style={{ gap: 20 }}>
           <Text style={styles.title}>Hello</Text>
           <Text style={styles.punchline}>MTG</Text>
@@ -83,11 +89,24 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginHorizontal: wp(10),
   },
+  imageContainer: {
+    position: "relative",
+  },
 
   welcomeImage: {
     height: hp(30),
     width: wp(100),
     alignSelf: "center",
+  },
+  clockContainer: {
+    position: "absolute",
+    top: 26,
+    left: 0,
+    right: -6,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1,
   },
 
   title: {
