@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     fontSize: hp(4),
     fontWeight: theme.fonts.bold,
     color: theme.colors.text,
+    fontFamily: "Poppins-Regular",
   },
 
   form: {

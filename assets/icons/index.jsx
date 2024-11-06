@@ -4,15 +4,18 @@ import Home from "./home";
 import User from "./user";
 import Email from "./email";
 import Lock from "./lock";
+import PieChart from "./piechart";
 import Contact from "./contact";
 import Chart from "./chart";
 import Database from "./database";
+import Dashboard from "./dashboard";
 import ArrowLeft from "./arrow";
 import Message from "./message";
 import { theme } from "../../constants/theme";
 import Logout from "./logout";
 
 const icons = {
+  pieChart: PieChart,
   message: Message,
   home: Home,
   arrowLeft: ArrowLeft,
@@ -23,6 +26,7 @@ const icons = {
   chart: Chart,
   contact: Contact,
   logout: Logout,
+  dashboard: Dashboard,
 };
 const Icon = ({ name, ...props }) => {
   const IconComponent = icons[name];

@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
+import BackButton from "../components/backButton";
+import { useRouter } from "expo-router";
 
 const RandomDataTable = () => {
   const [data, setData] = useState([]);
@@ -75,9 +77,10 @@ const RandomDataTable = () => {
   const getStatusColor = (status) => {
     return status === "Active" ? "#4CAF50" : "#FF5252";
   };
-
+  const router = useRouter();
   return (
     <View style={styles.container}>
+      <BackButton router={router}></BackButton>
       <Text style={styles.title}>Random Data Table</Text>
 
       <ScrollView

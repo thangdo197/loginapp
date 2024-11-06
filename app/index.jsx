@@ -1,153 +1,116 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import Input from "../components/Input";
+import React, { useRef, useState } from "react";
 import ScreenWrapper from "../components/ScreenWrapper";
-import { hp, wp } from "../helpers/common";
 import { theme } from "../constants/theme";
-import Button from "../components/Button";
-import { StatusBar } from "expo-status-bar";
-import { useRouter } from "expo-router";
 import Icon from "../assets/icons";
-import DigitalClock from "../components/DigitalClock";
-const index = () => {
+import { StatusBar } from "expo-status-bar";
+import BackButton from "../components/backButton";
+import { useRouter } from "expo-router";
+import { wp, hp } from "../helpers/common";
+import Button from "../components/Button";
+import SweetAlert from "react-native-sweet-alert";
+
+const Login = () => {
   const router = useRouter();
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  const [loading, setLoading] = useState(false);
+  const onSubmit = async () => {
+    if (!emailRef || !passwordRef) {
+      SweetAlert.alert("Login", "please fill all the fields");
+      return;
+    }
+  };
   return (
-    <ScreenWrapper bg="white">
+    <ScreenWrapper>
       <StatusBar style="dark" />
       <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.welcomeImage}
-            resizeMode="contain"
-            source={require("../assets/images/welcome1.png")}
+        <BackButton router={router}></BackButton>
+        <View>
+          <Text style={[styles.welcomeText, { color: "blue" }]}>
+            What's up,
+          </Text>
+          <Text style={styles.welcomeText}>Welcome back</Text>
+        </View>
+
+        <View style={styles.form}>
+          <Text style={{ fontSize: hp(2), color: theme.colors.text }}>
+            Please login to continue
+          </Text>
+          <Input
+            icon={<Icon name="email" size={26} strokeWidth={1.6} />}
+            placeholder="Enter your email"
+            onChangeText={(value) => (emailRef.current = value)}
           />
-          <View style={styles.clockContainer}>
-            <DigitalClock />
-          </View>
-        </View>
-      </View>
-      <View style={styles.container}>
-        <View style={{ gap: 20 }}>
-          <Text style={styles.title}>Hello</Text>
-          <Text style={styles.punchline}>MTG</Text>
-        </View>
-        <View style={styles.iconContainer}>
-          <Pressable onPress={() => router.push("chart")} style={styles.icon}>
-            <Icon name="chart" size={70} strokeWidth={1.6} />
-          </Pressable>
-          <Pressable onPress={() => router.push("chart")} style={styles.icon}>
-            <Icon name="logout" size={70} strokeWidth={1.6} />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push("database")}
-            style={styles.icon}
-          >
-            <Icon name="database" size={70} strokeWidth={1.6} />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push("contactUs")}
-            style={styles.icon}
-          >
-            <Icon name="contact" size={70} strokeWidth={1.6} />
-          </Pressable>
+          <Input
+            icon={<Icon name="lock" size={26} strokeWidth={1.6} />}
+            placeholder="Enter your password"
+            secureTextEntry
+            onChangeText={(value) => (passwordRef.current = value)}
+          />
+          <Button title={"Login"} onPress={() => router.push("main")} />,
+          {/* <Text style={styles.forgotPwd}>Forgot password?</Text> */},
+          {/* <Button title={"Login"} loading={loading} onPress={onSubmit} /> */}
+          ,
         </View>
 
         <View style={styles.footer}>
-          <Button
-            title="Getting Started"
-            buttonStyle={{ marginHorizontal: wp(3) }}
-            onPress={() => router.push("signUp")}
-          ></Button>
-          <View style={styles.bottomTextContainer}>
-            <Text style={styles.loginText}>Already have an account!</Text>
-            <Pressable onPress={() => router.push("login")}>
-              <Text
-                style={[
-                  styles.loginText,
-                  {
-                    color: theme.colors.primaryDark,
-                    fontWeight: theme.fonts.semibold,
-                  },
-                ]}
-              >
-                Login
-              </Text>
-            </Pressable>
-          </View>
+          <Text style={styles.footerText}>Don't have an account?</Text>
+          <Pressable onPress={() => router.push("signUp")}>
+            <Text
+              style={[
+                styles.footerText,
+                {
+                  color: theme.colors.roseLight,
+                  fontWeight: theme.fonts.semibold,
+                },
+              ]}
+            >
+              Sign up
+            </Text>
+          </Pressable>
         </View>
       </View>
     </ScreenWrapper>
   );
 };
 
-export default index;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "white",
-    marginHorizontal: wp(10),
-  },
-  imageContainer: {
-    position: "relative",
+    gap: 45,
+    paddingHorizontal: wp(5),
   },
 
-  welcomeImage: {
-    height: hp(30),
-    width: wp(100),
-    alignSelf: "center",
-  },
-  clockContainer: {
-    position: "absolute",
-    top: 26,
-    left: 0,
-    right: -6,
-    bottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1,
-  },
-
-  title: {
-    color: theme.colors.dark,
+  welcomeText: {
     fontSize: hp(4),
-    textAlign: "center",
-    fontWeight: theme.fonts.extrabold,
+    fontWeight: theme.fonts.bold,
+    color: theme.colors.text,
   },
 
-  punchline: {
-    textAlign: "center",
-    paddingHorizontal: wp(10),
-    fontSize: hp(2),
-    color: theme.colors.rose,
+  form: {
+    gap: 25,
+  },
+
+  forgotPwd: {
+    textAlign: "right",
+    fontWeight: theme.fonts.semibold,
+    color: theme.colors.text,
   },
 
   footer: {
-    gap: 30,
-    width: "100%",
-  },
-
-  bottomTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    alignContent: "center",
+    alignItems: "center",
     gap: 5,
   },
 
-  loginText: {
+  footerText: {
     textAlign: "center",
-    alignItems: "center",
+    fontSize: hp(1.6),
     color: theme.colors.text,
-    fontStyle: hp(1.6),
-  },
-  iconContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-  },
-  icon: {
-    marginHorizontal: 25,
   },
 });

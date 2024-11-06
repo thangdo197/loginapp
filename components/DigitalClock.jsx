@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-
+import { hp, wp } from "../helpers/common";
+import { theme } from "../constants/theme";
 const DigitalClock = () => {
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -34,15 +35,12 @@ const DigitalClock = () => {
   };
 
   useEffect(() => {
-    // Gọi getCurrentTime ngay lập tức khi component mount
     getCurrentTime();
 
-    // Tạo interval để cập nhật thời gian mỗi giây
     const timer = setInterval(getCurrentTime, 1000);
 
-    // Cleanup function khi component unmount
     return () => clearInterval(timer);
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -61,15 +59,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerText: {
-    fontSize: 30,
+    fontSize: theme.fonts.bold,
     textAlign: "center",
     margin: 10,
     color: "black",
-    fontWeight: "bold",
+    fontFamily: "BebasNeue-Regular",
   },
   timeText: {
-    fontSize: 50,
-    color: "#1e81b0",
+    color: theme.colors.dark,
+    fontSize: hp(4.8),
+    textAlign: "center",
+    fontWeight: theme.fonts.extrabold,
   },
 });
 

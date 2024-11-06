@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Card } from "react-native-elements";
-import { ProgressBar } from "react-native-paper";
+import { theme } from "../constants/theme";
+import ScreenWrapper from "./ScreenWrapper";
 
 const AdsCard = ({
   title = "Google Ads",
   budget = "0",
   progress = 0,
+  money = "$",
+  unit = "K",
   conversions = 0,
   costPerConversion = 0,
-  backgroundColor = "#222",
 }) => {
   // Convert progress to decimal (if input is percentage)
   const progressDecimal = progress > 1 ? progress / 100 : progress;
@@ -18,28 +20,134 @@ const AdsCard = ({
   const progressPercent = Math.round(progressDecimal * 100);
 
   return (
-    <Card containerStyle={[styles.cardContainer, { backgroundColor }]}>
-      <Card.Title style={styles.cardTitle}>{title}</Card.Title>
-      <View style={styles.cardContent}>
-        <Text style={styles.mainNumber}>${budget}</Text>
-        <Text style={styles.label}>budget spent</Text>
-
-        <View style={styles.progressContainer}>
-          <ProgressBar
-            progress={progressDecimal}
-            color="#3498db"
-            style={styles.progressBar}
-          />
-          <Text style={styles.label}>{progressPercent}%</Text>
+    <ScreenWrapper>
+      <Card containerStyle={styles.cardContainer}>
+        <Card.Title style={styles.cardTitle}>{title}</Card.Title>
+        <View />
+        <View style={{ flexDirection: "row", alignItems: "baseline" }}>
+          <Text
+            style={{
+              color: "#e1e0e6",
+              fontSize: 34,
+              fontWeight: "bold",
+              fontFamily: "Arial",
+            }}
+          >
+            {money}
+          </Text>
+          <Text style={styles.mainNumber}>{budget}</Text>
+          <Text
+            style={{
+              color: "#e1e0e6",
+              fontSize: 34,
+              marginLeft: 2,
+              fontWeight: "normal",
+              fontFamily: "Arial",
+            }}
+          >
+            {unit}
+          </Text>
         </View>
+        <View style={styles.cardContent}>
+          <Text
+            style={{
+              color: "#e1e0e6",
+              fontSize: 14,
+              marginLeft: -5,
+              fontWeight: "normal",
+            }}
+          >
+            budget spent
+          </Text>
 
-        <Text style={styles.mainNumber}>{conversions}</Text>
-        <Text style={styles.label}>conversions</Text>
+          <View />
 
-        <Text style={styles.mainNumber}>${costPerConversion}</Text>
-        <Text style={styles.label}>per conv</Text>
-      </View>
-    </Card>
+          <View style={styles.progressContainer}>
+            <View style={styles.progressBarWrapper}>
+              <View
+                style={[styles.progressBar, { width: `${progressPercent}%` }]}
+              />
+            </View>
+            <View style={styles.textContainer}>
+              <Text style={styles.progressText}>{progressPercent}%</Text>
+              <Text style={styles.valueText}>$5k</Text>
+            </View>
+          </View>
+          <View />
+          <View />
+          <View />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "baseline",
+              color: "#e1e0e6",
+            }}
+          >
+            <Text
+              style={{
+                color: "#e1e0e6",
+                fontSize: 54,
+                fontWeight: "bold",
+                fontFamily: "",
+              }}
+            >
+              {conversions}
+            </Text>
+            <Text
+              style={{
+                color: "#e1e0e6",
+                fontSize: 20,
+                marginLeft: 5,
+                fontWeight: "normal",
+                fontFamily: "",
+              }}
+            >
+              conversions
+            </Text>
+          </View>
+          <View />
+          <View />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "baseline",
+              color: "#e1e0e6",
+            }}
+          >
+            <Text
+              style={{
+                color: "#e1e0e6",
+                fontSize: 34,
+                fontWeight: "bold",
+                fontFamily: "",
+              }}
+            >
+              {money}
+            </Text>
+            <Text
+              style={{
+                color: "#e1e0e6",
+                fontSize: 54,
+                fontWeight: "bold",
+              }}
+            >
+              {costPerConversion}
+            </Text>
+            <Text
+              style={{
+                color: "#e1e0e6",
+                fontSize: 20,
+                marginLeft: 5,
+                fontWeight: "normal",
+                fontFamily: "",
+              }}
+            >
+              per conv
+            </Text>
+          </View>
+        </View>
+      </Card>
+    </ScreenWrapper>
   );
 };
 
@@ -51,31 +159,58 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 0,
     padding: 15,
+    height: "100%",
+    backgroundColor: "#272952",
   },
   cardTitle: {
-    color: "white",
+    color: "#e1e0e6",
     textAlign: "left",
     marginBottom: 10,
   },
   cardContent: {
+    textAlign: "left",
     gap: 5,
   },
   mainNumber: {
-    color: "white",
-    fontSize: 24,
+    color: "#e1e0e6",
+    fontSize: 54,
     fontWeight: "bold",
     marginTop: 5,
   },
   label: {
-    color: "white",
+    color: "#e1e0e6",
     fontSize: 14,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 5,
   },
   progressContainer: {
-    marginVertical: 10,
+    padding: 3,
+    width: "100%",
+  },
+  progressBarWrapper: {
+    height: 8,
+    backgroundColor: "#47466d",
+    borderRadius: 4,
+    overflow: "hidden",
   },
   progressBar: {
-    height: 8,
+    height: "100%",
+    backgroundColor: "#00e1ff",
     borderRadius: 4,
-    marginBottom: 5,
+  },
+  textContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 2, // Khoảng cách giữa bar và text
+  },
+  progressText: {
+    color: "#00e1ff",
+    fontSize: 8,
+    fontWeight: "bold",
+  },
+  valueText: {
+    color: "white",
+    fontSize: 8,
   },
 });

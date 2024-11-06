@@ -6,6 +6,7 @@ import { theme } from "../constants/theme";
 import Button from "../components/Button";
 import { StatusBar } from "expo-status-bar";
 import { useRouter } from "expo-router";
+import { Time } from "../components/DigitalClock";
 
 const Welcome = () => {
   const router = useRouter();
@@ -18,6 +19,9 @@ const Welcome = () => {
           resizeMode="contain"
           source={require("../assets/images/welcome.png")}
         />
+        <View>
+          <Time></Time>
+        </View>
 
         <View style={{ gap: 20 }}>
           <Text style={styles.title}>Hello</Text>
