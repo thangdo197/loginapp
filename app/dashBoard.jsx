@@ -5,6 +5,7 @@ import AdsCard from "../components/AdsCard";
 import CustomCard from "../components/CustomCard";
 import ScreenWrapper from "../components/ScreenWrapper";
 import StatisticCard from "../components/Statistic";
+import DigitalClock from "../components/DigitalClock";
 
 const screenWidth = Dimensions.get("window").width;
 const maxWidth = 1400;
@@ -135,6 +136,9 @@ const Dashboard = () => {
               </View>
             ))}
           </View>
+          <View style={styles.clockContainer}>
+            <DigitalClock />
+          </View>
         </View>
       </ScrollView>
     </ScreenWrapper>
@@ -163,6 +167,11 @@ const styles = StyleSheet.create({
   cardWrapper: {
     width: Math.min(280, (maxWidth - containerPadding * 2 - 48) / 4),
     minWidth: 250,
+  },
+  clockContainer: {
+    position: "relative",
+    top: 10, // Adjust top margin as needed
+    right: -460, // Adjust right margin as needed
   },
 });
 

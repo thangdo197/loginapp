@@ -86,7 +86,7 @@ const SessionsCard = ({ title, data, amount, unit }) => {
               },
               propsForLabels: {
                 fontSize: 12,
-                textAlign: "right",
+                textalign: "right",
               },
               propsForBackgroundLines: {
                 strokeWidth: 1,
@@ -105,11 +105,11 @@ const SessionsCard = ({ title, data, amount, unit }) => {
             withVerticalLines={false}
             withHorizontalLines={true}
             withInnerLines={true}
-            fromZero={true} // Bắt đầu từ 0
+            fromZero={true}
             style={{
               marginVertical: 15,
               borderRadius: 10,
-              paddingRight: 25,
+              paddingRight: 24,
             }}
             segments={3}
           />

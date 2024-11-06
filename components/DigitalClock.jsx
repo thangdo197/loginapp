@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     fontFamily: "BebasNeue-Regular",
   },
   timeText: {
-    color: theme.colors.dark,
+    color: "#e1e0e6",
     fontSize: hp(4.8),
     textAlign: "center",
     fontWeight: theme.fonts.extrabold,
